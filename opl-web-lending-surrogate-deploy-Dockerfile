@@ -1,0 +1,5 @@
+FROM openjdk:8-jdk-alpine
+EXPOSE 8665
+COPY config /config
+ADD opl-web-lending-surrogate-deploy-16.0.0.jar opl-web-lending-surrogate-deploy-16.0.0.jar
+ENTRYPOINT ["nohup","java","-XX:+UseG1GC","-Xms256m","-Xmx1024m","-Dname=opl-web-lending-surrogate-deploy","-jar","opl-web-lending-surrogate-deploy-16.0.0.jar","--Dserver.port=8665","--spring.config.location=/config/application.properties","&"]
